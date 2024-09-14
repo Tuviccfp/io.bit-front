@@ -1,0 +1,50 @@
+.section-acess {
+    
+}
+.section-acess > article {
+ display: flex;
+ align-items: center;   
+ gap: 50px;
+}
+.section-acess > article > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-acess > article > form > label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: self-start;
+    color: #F4f4f4;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+}
+
+.section-acess > article > form > label > input {
+    width: 336px;
+    height: 33px;
+    border-radius: 8px;
+    padding-left: 2px;
+    padding-right: 2px;
+    outline: none;
+    border: 1px solid transparent;
+}
+.section-acess > article > form > label > input:focus {
+    border: 1.5px solid #ec4899;
+}
+.section-acess > article > form > input[type="submit"] {
+    width: 160px;
+    height: 37px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #8b5cf6;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid transparent;
+    color: #f5f3ff;
+    font-size: 16px;
+}

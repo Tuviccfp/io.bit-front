@@ -1,0 +1,18 @@
+.article-welcome > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.article-welcome > span > button {
+    background-color: #8b5cf6;
+    color: #f5f3ff;
+    width: 157px;
+    height: 35px;
+    border-radius: 8px;
+    border: 1px solid, transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}

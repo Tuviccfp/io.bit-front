@@ -1,0 +1,15 @@
+.list-menu {
+    padding-inline-start: 0px;
+    list-style: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.nav-component-menu {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+}

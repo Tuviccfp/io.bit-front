@@ -1,0 +1,105 @@
+.create-goals-nav {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: auto !important;
+  background-color: #09090b;
+}
+
+.create-goals-component {
+  width: 50vw;
+  height: 0;
+  opacity: 0;
+  margin: 0px !important;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+.create-goals-component.show {
+  width: auto !important;
+  height: 100vh;
+  opacity: 1;
+  background-color: #18181b;
+  transition: width 0.8s ease, height 0.8s ease, opacity 0.8s ease,
+    background-color 0.8s ease;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.create-goals-component.hidden {
+  width: 0px !important;
+  height: 0px !important;
+  opacity: 0px !important;
+  background-color: #18181b;
+  color: #18181b;
+  transition: width 0.8s ease, height 0.8s ease, opacity 0.8s ease;
+}
+
+.create-goals-component > span {
+  width: 24vw !important;
+}
+.create-goals-component > span > h4 {
+  color: #f5f3ff;
+}
+.create-goals-component > span > p {
+  color: #a1a1aa;
+  margin: 0;
+}
+
+.create-goals-component > form > label > input[type="text"] {
+  width: 336px;
+  height: 48px;
+  border-radius: 8px;
+  padding: 8px;
+  color: #a1a1aa;
+}
+.create-goals-component > form > label > input[type="checkbox"] {
+  width: 336px;
+  height: 48px;
+  opacity: 0;
+  position: absolute;
+}
+
+
+
+.checkbox-personalite {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.checkbox-personalite > label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+  border: 1px solid #ec4899;
+  width: 463px;
+  height: 39px;
+  border-radius: 8px;
+
+}
+.checkbox-personalite > p {
+    margin: 5px;
+}
+
+
+.buttons-goals {
+    position: fixed;
+    left: 52.5px;
+    bottom: 32px;
+}
+.buttons-goals > button {
+    width: 162px;
+    height: 39px;
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid transparent;
+    background-color: #8b5cf6;
+    margin: 12px;
+    box-sizing: border-box;
+}

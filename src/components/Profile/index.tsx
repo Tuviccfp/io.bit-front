@@ -4,10 +4,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { User, Plus, List } from "@phosphor-icons/react";
 import { z } from "zod";
+import { useNavigate } from "react-router-dom";
 import MenuNavigationComponent from "../../shared/Menu";
-import startsvg from "../../assets/lets-start-illustration.svg"
-import './style.css'
 import CreateGoalsComponent from "../CreateGoals";
+import startsvg from "../../assets/lets-start-illustration.svg";
+import "./style.css";
+
 const userSchema = z.object({
   id: z.string().min(36),
   username: z.string(),
@@ -22,13 +24,13 @@ const goalsSchema = z.object({
   desiredWeeklyFrequency: z.number(),
   createdAt: z.date(),
   updatedAt: z.date(),
-})
+});
 type UserData = z.infer<typeof userSchema>;
-type GoalsDataByUserID = z.infer<typeof goalsSchema>
+type GoalsDataByUserID = z.infer<typeof goalsSchema>;
 
 interface ApiResponse {
-  userData: UserData[],
-  goalsDataByUserID: GoalsDataByUserID[]
+  userData: UserData[];
+  goalsDataByUserID: GoalsDataByUserID[];
 }
 const menuItems = [
   { menuName: "Teste 1", key: 1 },
@@ -36,62 +38,63 @@ const menuItems = [
 ];
 
 export default function ProfileComponent() {
-  const url = import.meta.env.VITE_API_URL
+  const url = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
   const [user, setUser] = React.useState<UserData[]>([]);
-  const [goalsData, setGoalsData] = React.useState<GoalsDataByUserID[]>([])
-  const [showGoals, setShowGoals] = React.useState<boolean>(false)
+  const [goalsData, setGoalsData] = React.useState<GoalsDataByUserID[]>([]);
 
   const handleShowGoals = () => {
-    setShowGoals(!showGoals);
-  }
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    navigate("/goals-page");
+  };
   React.useEffect(() => {
-    const fetchAPI = async ( ) => {
+    const fetchAPI = async () => {
       try {
-        const response = await axios.get<ApiResponse>(`${url}/profile-acess`, { headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${Cookies.get('Authorization')}` }  });
+        const response = await axios.get<ApiResponse>(`${url}/profile-acess`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("Authorization")}`,
+          },
+        });
         setUser(response.data.userData);
         setGoalsData(response.data.goalsDataByUserID);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
-    }
-  
+    };
+
     fetchAPI();
-  }, [url])
+  }, [url]);
 
   if (!user.length && !goalsData.length) {
-    return
+    return;
   }
-  const { username } = user[0]
+  const { username } = user[0];
   return (
     <section>
       <MenuNavigationComponent
         itemsMenu={menuItems}
-        logo={<User size={25} style={{margin: 0, padding: 0}}/>}
+        logo={<User size={25} style={{ margin: 0, padding: 0 }} />}
         username={username}
       />
       <CreateGoalsComponent />
       <article className="article-welcome">
         <img src={startsvg} alt="Ilustração de começar" />
         <h2>Bem vindo, {username}!</h2>
-        <p>Aqui você pode gerenciar suas metas, verificar progresso e visualizar seu histórico.</p>
+        <p>
+          Aqui você pode gerenciar suas metas, verificar progresso e visualizar
+          seu histórico.
+        </p>
         <span>
-          <button type="button"><Plus size={22}/>Cadastrar meta</button>
-          <button onClick={handleShowGoals} type="button"><List size={22}/>Listar metas</button>
+          <button type="button">
+            <Plus size={22} />
+            Cadastrar meta
+          </button>
+          <button onClick={handleShowGoals} type="button">
+            <List size={22} />
+            Listar metas
+          </button>
         </span>
       </article>
-
-      {showGoals && (
-        <article>
-          {goalsData.map((item) => (
-            <div key={item.id}>
-              <h4>{item.title}</h4>
-              <p>Frequência desejada: {item.desiredWeeklyFrequency} vezes por semana</p>
-              <p>Criado em: {item.createdAt.toLocaleString()}</p>
-            </div>
-          ))}
-        </article>
-      )}
     </section>
   );
 }
